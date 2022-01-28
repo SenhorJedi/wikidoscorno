@@ -3,8 +3,11 @@ import 'package:wikidoscorno/widget/max_width_container_widget.dart';
 import 'package:wikidoscorno/widget/responsive_layout_widget.dart';
 
 void main() {
+  setPathUrlStrategy();
   runApp(const MyApp());
 }
+
+void setPathUrlStrategy() {}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
