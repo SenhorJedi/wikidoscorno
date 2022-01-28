@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:wikidoscorno/widget/desktop/desktop_body_widget.dart';
 import 'package:wikidoscorno/widget/max_width_container_widget.dart';
+import 'package:wikidoscorno/widget/mobile/mobile_body_widget.dart';
 import 'package:wikidoscorno/widget/responsive_layout_widget.dart';
+import 'package:wikidoscorno/widget/tablet/tablet_body_widget.dart';
 
 void main() {
   setPathUrlStrategy();
@@ -24,11 +27,11 @@ class MyApp extends StatelessWidget {
         body: MaxWidthContainer(
             child: ResponsiveLayout(
           //AQUI FICA OS 3 "SITES" CRIADOS, POIS ASSIM TEMOS CONTROLE INDIVUDIAL POR TELA, DA PRA FAZER UNS AJUSTES FINOS ASSIM.
-          mobileBody: SizedBox(),
-          desktopBody: SizedBox(),
-          tabletBody: SizedBox(),
+          mobileBody: MobileBody(),
+          desktopBody: DesktopBody(),
+          tabletBody: TabletBody(),
         )),
-      ), //TODO INDEX PAGE
+      ),
     );
   }
 }
