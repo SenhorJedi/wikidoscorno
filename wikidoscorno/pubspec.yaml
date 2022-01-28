@@ -38,6 +38,8 @@ dependencies:
 
   ##Estrategia de url só pra nao ter o /#/ no fim da url. é feio
   url_strategy: ^0.2.0
+  google_fonts: ^2.2.0
+  http: ^0.13.4
   
 dev_dependencies:
   flutter_test:
