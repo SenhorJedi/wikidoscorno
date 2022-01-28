@@ -28,8 +28,8 @@ class MyApp extends StatelessWidget {
             child: ResponsiveLayout(
           //AQUI FICA OS 3 "SITES" CRIADOS, POIS ASSIM TEMOS CONTROLE INDIVUDIAL POR TELA, DA PRA FAZER UNS AJUSTES FINOS ASSIM.
           mobileBody: MobileBody(),
-          desktopBody: DesktopBody(),
-          tabletBody: TabletBody(),
+          //tabletBody: TabletBody(),
+          //desktopBody: DesktopBody(),
         )),
       ),
     );
