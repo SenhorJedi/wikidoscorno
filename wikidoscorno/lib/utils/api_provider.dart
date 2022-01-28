@@ -46,9 +46,9 @@ class ApiProvider {
     String statuscode = '';
 
     const String unencodedPath = '/api/v1/wiki/artigo';
-    var params = {
-      'size': pagesize,
-      'page': page,
+    Map<String, String> params = {
+      'size': pagesize.toString(),
+      'page': page.toString(),
       'ordem': orderby,
       'ordemtp': ordemtipo,
       'pesquisasrc': search.trim(),
@@ -60,31 +60,22 @@ class ApiProvider {
             Uri.https(
               authority,
               unencodedPath,
-              {
-                'size': pagesize,
-                'page': page,
-                'ordem': orderby,
-                'ordemtp': ordemtipo,
-                'pesquisasrc': search.trim(),
-              },
+              params,
             ),
           )
           .timeout(const Duration(seconds: 60));
 
-      print('ESTOU PROVIDER');
-      print(response);
-
       var decoded = json.decode(response.body);
 
       artigos = List<Artigo>.from(
-          json.decode(response.body)["data"].map((x) => Artigo.fromJson(x)));
+        json.decode(response.body)["data"].map((x) => Artigo.fromJson(x)),
+      );
 
       maxpage = decoded["last_page"];
     } catch (e) {
       statuscode = '$e';
       print(e);
     }
-
     return ResultApiArtigo(
       artigos,
       statuscode,

@@ -1,7 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:wikidoscorno/model/api_result_artigo.dart';
-import 'package:wikidoscorno/model/artigo.dart';
 import 'package:wikidoscorno/utils/api_provider.dart';
 import 'package:wikidoscorno/utils/custom_sliver_delegate.dart';
 import 'package:wikidoscorno/utils/estilos_texto.dart';
@@ -22,7 +20,7 @@ class MobileBody extends StatelessWidget {
     );
   }
 
-  _buildMobileBodyConteudo() async {
+  Widget _buildMobileBodyConteudo() {
     return Container(
       padding: const EdgeInsets.all(10),
       height: 350,
@@ -31,17 +29,26 @@ class MobileBody extends StatelessWidget {
       ),
       child: FutureBuilder(
         future: ApiProvider().getTodosArtigos(),
-        builder: (context, dynamic snapshot) {
-          print('INICIANDO FUTURE!');
-          if (snapshot.connectionState == ConnectionState.done) {
-            print('done!');
+        builder:
+            (BuildContext context, AsyncSnapshot<ResultApiArtigo> snapshot) {
+          print('Iniciando future');
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            print('esperando future');
+            return const Center(
+              child: SizedBox.square(
+                dimension: 50,
+                child: CircularProgressIndicator(),
+              ),
+            );
+          } else {
             return GridView.builder(
+              itemCount: snapshot.data!.artigos.length,
               gridDelegate:
                   const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
                 crossAxisCount: 4,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
-                height: 50,
+                height: 100,
               ),
               itemBuilder: (context, index) {
                 var artigo = snapshot.data!.artigos[index];
@@ -65,13 +72,6 @@ class MobileBody extends StatelessWidget {
                   ),
                 );
               },
-            );
-          } else {
-            return const Center(
-              child: SizedBox.square(
-                dimension: 50,
-                child: CircularProgressIndicator(),
-              ),
             );
           }
         },
