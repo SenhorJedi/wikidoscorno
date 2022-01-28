@@ -46,13 +46,33 @@ class ApiProvider {
     String statuscode = '';
 
     const String unencodedPath = '/api/v1/wiki/artigo';
-    String params = urlEncode(
-        '?size=$pagesize&page=$page&ordem=$orderby&ordemtp=$ordemtipo&pesquisasrc=${search.trim()}');
+    var params = {
+      'size': pagesize,
+      'page': page,
+      'ordem': orderby,
+      'ordemtp': ordemtipo,
+      'pesquisasrc': search.trim(),
+    };
 
     try {
       var response = await http
-          .get(Uri.https(authority, unencodedPath + params))
+          .get(
+            Uri.https(
+              authority,
+              unencodedPath,
+              {
+                'size': pagesize,
+                'page': page,
+                'ordem': orderby,
+                'ordemtp': ordemtipo,
+                'pesquisasrc': search.trim(),
+              },
+            ),
+          )
           .timeout(const Duration(seconds: 60));
+
+      print('ESTOU PROVIDER');
+      print(response);
 
       var decoded = json.decode(response.body);
 

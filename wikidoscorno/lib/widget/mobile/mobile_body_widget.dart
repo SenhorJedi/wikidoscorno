@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:wikidoscorno/model/api_result_artigo.dart';
 import 'package:wikidoscorno/model/artigo.dart';
@@ -22,43 +23,57 @@ class MobileBody extends StatelessWidget {
   }
 
   _buildMobileBodyConteudo() async {
-    ResultApiArtigo resultApiArtigos = await ApiProvider().getTodosArtigos();
-
     return Container(
       padding: const EdgeInsets.all(10),
       height: 350,
       decoration: const BoxDecoration(
         color: Colors.white,
       ),
-      child: GridView.builder(
-        gridDelegate:
-            const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-          crossAxisCount: 4,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          height: 50,
-        ),
-        itemBuilder: (context, index) {
-          Artigo artigo = resultApiArtigos.artigos[index];
-          return InkWell(
-            onHover: (isHovering) {},
-            child: Card(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    artigo.titulo,
-                    style: styleTexto(),
-                  ),
-                  Text(
-                    artigo.conteudo,
-                    style: styleTexto(),
-                  ),
-                ],
+      child: FutureBuilder(
+        future: ApiProvider().getTodosArtigos(),
+        builder: (context, dynamic snapshot) {
+          print('INICIANDO FUTURE!');
+          if (snapshot.connectionState == ConnectionState.done) {
+            print('done!');
+            return GridView.builder(
+              gridDelegate:
+                  const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
+                crossAxisCount: 4,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                height: 50,
               ),
-            ),
-          );
+              itemBuilder: (context, index) {
+                var artigo = snapshot.data!.artigos[index];
+                return InkWell(
+                  onHover: (isHovering) {},
+                  child: Card(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          artigo.titulo,
+                          style: styleTexto(),
+                        ),
+                        Text(
+                          artigo.conteudo,
+                          style: styleTexto(),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+          } else {
+            return const Center(
+              child: SizedBox.square(
+                dimension: 50,
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
         },
       ),
     );
