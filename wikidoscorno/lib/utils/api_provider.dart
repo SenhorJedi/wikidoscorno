@@ -3,7 +3,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:url_encoder/url_encoder.dart';
 import 'package:wikidoscorno/model/api_result_artigo.dart';
 import 'package:wikidoscorno/model/artigo.dart';
 
@@ -12,6 +11,28 @@ class ApiProvider {
   static const int pageSize = 20;
   static const String orderBy = 'titulo';
   static const String ordemTipo = 'asc';
+
+  String urlEncode(String text) {
+    String output = text;
+
+    var detectHash = text.contains('#');
+    var detectAnd = text.contains('&');
+    var detectSlash = text.contains('/');
+
+    if (detectHash == true) {
+      output = output.replaceAll('#', '%23');
+    }
+
+    if (detectAnd == true) {
+      output = output.replaceAll('#', '%26');
+    }
+
+    if (detectSlash == true) {
+      output = output.replaceAll('#', '%2F');
+    }
+
+    return output;
+  }
 
   Future<ResultApiArtigo> getTodosArtigos({
     int page = 1,
@@ -26,8 +47,7 @@ class ApiProvider {
 
     const String unencodedPath = '/api/v1/wiki/artigo';
     String params = urlEncode(
-        text:
-            '?size=$pagesize&page=$page&ordem=$orderby&ordemtp=$ordemtipo&pesquisasrc=${search.trim()}');
+        '?size=$pagesize&page=$page&ordem=$orderby&ordemtp=$ordemtipo&pesquisasrc=${search.trim()}');
 
     try {
       var response = await http
