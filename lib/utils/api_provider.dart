@@ -95,6 +95,7 @@ class ApiProvider {
     required String linguagem,
     required String tag,
     required String email,
+    int ativo = 0,
   }) async {
     String res = '';
 
@@ -105,7 +106,8 @@ class ApiProvider {
       'conteudo': conteudo,
       'linguagem': linguagem,
       'tag': tag,
-      'email_usuario': email
+      'email_usuario': email,
+      'ativo': ativo,
     };
 
     try {
