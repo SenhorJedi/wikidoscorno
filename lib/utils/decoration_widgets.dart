@@ -1,16 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:wikidoscorno/utils/colors.dart';
 
 decorationTextFormField({
-  String? hintText,
+  required String label,
   Widget? prefixIcon,
   Color? fillColor,
-  TextStyle? hintStyle,
+  TextStyle? labelStyle,
 }) =>
     InputDecoration(
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
       filled: true,
-      fillColor: fillColor ?? Colors.white,
-      hintText: hintText,
-      hintStyle: hintStyle,
+      fillColor: fillColor,
+      alignLabelWithHint: true,
+      label: Text(
+        label,
+        style: labelStyle,
+      ),
+      hintStyle: labelStyle,
       prefixIcon: prefixIcon,
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: const BorderSide(color: Colors.transparent),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: const BorderSide(color: Colors.white),
+      ),
+    );
+
+decorationDropDownFormField({
+  required String label,
+  Widget? prefixIcon,
+  Color? fillColor,
+  TextStyle? labelStyle,
+}) =>
+    InputDecoration(
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
+      filled: true,
+      fillColor: fillColor,
+      alignLabelWithHint: true,
+      label: Text(
+        label,
+        style: labelStyle,
+      ),
+      hintStyle: labelStyle,
+      prefixIcon: prefixIcon,
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: const BorderSide(color: Colors.transparent),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: const BorderSide(color: Colors.white),
+      ),
     );

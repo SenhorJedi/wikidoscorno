@@ -15,6 +15,7 @@ class _CadastroArtigoPageState extends State<CadastroArtigoPage> {
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return Container(
       color: websitePurple,
       child: Stack(
@@ -68,6 +69,32 @@ class _CadastroArtigoPageState extends State<CadastroArtigoPage> {
                       color: Colors.purple.shade900,
                     ),
                   ),
+=======
+    return Scaffold(
+      backgroundColor: websitePurple,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          children: [
+            Text(
+              'Cadastro Artigo',
+              style: styleTituloNegrito(color: Colors.white),
+            ),
+            const FormularioCadastro(),
+            ElevatedButton(
+              onPressed: () {},
+              style: styleElevatedButton(
+                primary: Colors.white,
+              ),
+              child: Text(
+                'Salvar',
+                style: styleTexto(
+                  color: Colors.purple.shade900,
+>>>>>>> 697def5f6eb502eb3c71f281cf57b5330751f7b9
                 ),
               ],
             ),

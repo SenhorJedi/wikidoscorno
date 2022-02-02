@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wikidoscorno/page/cadastro_artigo_page.dart';
 import 'package:wikidoscorno/utils/colors.dart';
 import 'package:wikidoscorno/utils/decoration_widgets.dart';
 import 'package:wikidoscorno/utils/estilos_texto.dart';
@@ -35,16 +36,35 @@ class MobileBodyHeader extends StatelessWidget {
             child: Form(
               child: TextFormField(
                 decoration: decorationTextFormField(
-                  hintText: "diga-me o'que desejas!",
+                  fillColor: websiteInsidePurple,
+                  label: "diga-me o'que desejas!",
+                  labelStyle: styleTexto(color: Colors.white, fontSize: 18),
                   prefixIcon: const Icon(
                     Icons.search,
                     size: 20,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
                 onChanged: (value) =>
                     SearchNotifier().newSearchValue(newValue: value),
               ),
+            ),
+          ),
+          ElevatedButton(
+            style: styleElevatedButton(
+              primary: websiteInsidePurple,
+              onPrimary: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const CadastroArtigoPage(),
+                ),
+              );
+            },
+            child: Text(
+              "Cadastrar artigo",
+              style: styleTexto(),
             ),
           ),
         ],
