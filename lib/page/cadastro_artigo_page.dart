@@ -15,102 +15,78 @@ class _CadastroArtigoPageState extends State<CadastroArtigoPage> {
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    return Container(
-      color: websitePurple,
-      child: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              children: [
-                Text(
-                  'Cadastro Artigo',
-                  style: styleTituloNegrito(color: Colors.white),
-                ),
-                const FormularioCadastro(),
-                ElevatedButton(
-                  onPressed: () async {
-                    setState(() {
-                      isLoading = !isLoading;
-                    });
+    return Scaffold(
+        backgroundColor: websitePurple,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+        ),
+        body: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  Text(
+                    'Cadastro Artigo',
+                    style: styleTituloNegrito(color: Colors.white),
+                  ),
+                  const FormularioCadastro(),
+                  ElevatedButton(
+                    onPressed: () async {
+                      setState(() {
+                        isLoading = !isLoading;
+                      });
 
-                    String response = await ApiProvider().insertArtigo(
-                        'api apiapi',
-                        'aqui é o conteudo',
-                        'aqui a linguagem',
-                        'tag');
+                      String response = await ApiProvider().insertArtigo(
+                          'api apiapi',
+                          'aqui é o conteudo',
+                          'aqui a linguagem',
+                          'tag');
 
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        behavior: SnackBarBehavior.floating,
-                        padding: const EdgeInsets.all(10),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        content: Container(
-                          child: Text(
-                            response.toString(),
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          behavior: SnackBarBehavior.floating,
+                          padding: const EdgeInsets.all(10),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          content: Container(
+                            child: Text(
+                              response.toString(),
+                            ),
                           ),
                         ),
-                      ),
-                    );
+                      );
 
-                    setState(() {
-                      isLoading = !isLoading;
-                    });
-                  },
-                  style: styleElevatedButton(
-                    primary: Colors.white,
-                  ),
-                  child: Text(
-                    'Salvar',
-                    style: styleTexto(
-                      color: Colors.purple.shade900,
+                      setState(() {
+                        isLoading = !isLoading;
+                      });
+                    },
+                    style: styleElevatedButton(
+                      primary: Colors.white,
+                    ),
+                    child: Text(
+                      'Salvar',
+                      style: styleTexto(
+                        color: Colors.purple.shade900,
+                      ),
                     ),
                   ),
-=======
-    return Scaffold(
-      backgroundColor: websitePurple,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            Text(
-              'Cadastro Artigo',
-              style: styleTituloNegrito(color: Colors.white),
-            ),
-            const FormularioCadastro(),
-            ElevatedButton(
-              onPressed: () {},
-              style: styleElevatedButton(
-                primary: Colors.white,
+                ],
               ),
-              child: Text(
-                'Salvar',
-                style: styleTexto(
-                  color: Colors.purple.shade900,
->>>>>>> 697def5f6eb502eb3c71f281cf57b5330751f7b9
-                ),
-              ],
             ),
-          ),
-          (isLoading)
-              ? Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  color: Colors.grey.withOpacity(.5),
-                  child: const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                )
-              : const SizedBox(),
-        ],
-      ),
-    );
+            (isLoading)
+                ? Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                    color: Colors.grey.withOpacity(.5),
+                    child: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
+                : const SizedBox(),
+          ],
+        ));
   }
 }
