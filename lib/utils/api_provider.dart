@@ -95,7 +95,8 @@ class ApiProvider {
     required String linguagem,
     required String tag,
     required String email,
-    int ativo = 0,
+    int ativo = 2
+    ,
   }) async {
     String res = '';
 
