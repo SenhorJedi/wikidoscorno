@@ -13,9 +13,13 @@ class CadastroArtigoPage extends StatefulWidget {
 class _CadastroArtigoPageState extends State<CadastroArtigoPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: websitePurple,
-      child: Padding(
+    return Scaffold(
+      backgroundColor: websitePurple,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
+      body: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
