@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wikidoscorno/page/cadastro_artigo_page.dart';
 import 'package:wikidoscorno/widget/max_width_container_widget.dart';
 import 'package:wikidoscorno/widget/mobile/mobile_body_widget.dart';
 import 'package:wikidoscorno/widget/responsive_layout_widget.dart';

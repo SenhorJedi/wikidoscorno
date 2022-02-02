@@ -5,10 +5,11 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:wikidoscorno/model/api_result_artigo.dart';
 import 'package:wikidoscorno/model/artigo.dart';
+import 'package:wikidoscorno/model/pages.dart';
 
 class ApiProvider {
   final String authority = 'gestor.rjinformatica.net.br';
-  static const int pageSize = 20;
+  static const int pageSize = 3;
   static const String orderBy = 'titulo';
   static const String ordemTipo = 'asc';
 
@@ -43,6 +44,7 @@ class ApiProvider {
     int ativo = 1,
   }) async {
     List<Artigo> artigos = [];
+    List<Pages> paginas = [];
     int maxpage = 0;
     String statuscode = '';
     String responsebody = '';
@@ -74,6 +76,26 @@ class ApiProvider {
         json.decode(response.body)["data"].map((x) => Artigo.fromJson(x)),
       );
 
+      try {
+        paginas = List<Pages>.from(
+          json.decode(response.body)["links"].map((x) => Pages.fromJson(x)),
+        );
+
+        //print(paginas.toString());
+        for (var element in paginas) {
+          element.label = element.label
+              .toString()
+              .replaceAll('&laquo; Previous', 'Anterior');
+          element.label =
+              element.label.toString().replaceAll('Next &raquo;', 'Proxima');
+
+          print(element.toJson());
+        }
+      } catch (e) {
+        print('Erro ao montar paginas: $e');
+        print(decoded["links"]);
+      }
+
       maxpage = decoded["last_page"];
     } catch (e) {
       statuscode = 'Erro ao buscar! $e';
@@ -86,6 +108,7 @@ class ApiProvider {
       artigos,
       statuscode,
       maxpage,
+      paginas,
     );
   }
 
@@ -95,8 +118,7 @@ class ApiProvider {
     required String linguagem,
     required String tag,
     required String email,
-    int ativo = 2
-    ,
+    int ativo = 2,
   }) async {
     String res = '';
 

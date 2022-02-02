@@ -46,7 +46,7 @@ class MobileBodyHeader extends StatelessWidget {
                   ),
                 ),
                 onChanged: (value) =>
-                    SearchNotifier().newSearchValue(newValue: value),
+                    SearchNotifier().newSearchValue(newValue: value, page: 1),
               ),
             ),
           ),
