@@ -4,6 +4,8 @@ import 'package:wikidoscorno/widget/max_width_container_widget.dart';
 import 'package:wikidoscorno/widget/mobile/mobile_body_widget.dart';
 import 'package:wikidoscorno/widget/responsive_layout_widget.dart';
 
+import 'utils/theme.dart';
+
 void main() {
   setPathUrlStrategy();
   runApp(const MyApp());
@@ -19,14 +21,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Wiki Dos Cor*o',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: AppTheme(context).defaultTheme,
       home: const Scaffold(
         body: MaxWidthContainer(
             child: ResponsiveLayout(
           //AQUI FICA OS 3 "SITES" CRIADOS, POIS ASSIM TEMOS CONTROLE INDIVUDIAL POR TELA, DA PRA FAZER UNS AJUSTES FINOS ASSIM.
-          mobileBody: CadastroArtigoPage(), // MobileBody(),
+          mobileBody: MobileBody(),
           //tabletBody: TabletBody(),
           //desktopBody: DesktopBody(),
         )),

@@ -32,7 +32,7 @@ styleTexto({
 }) =>
     GoogleFonts.roboto(
       fontSize: fontSize ?? kFontSize,
-      color: color ?? Colors.black,
+      color: color,
     );
 
 //? styleElevatedButton
@@ -40,9 +40,11 @@ styleElevatedButton({
   Color? primary,
   Color? onPrimary,
   Size? minimumSize,
+  OutlinedBorder? shape,
 }) =>
     ElevatedButton.styleFrom(
       primary: primary,
       onPrimary: onPrimary,
-      minimumSize: const Size(150, 40),
+      minimumSize: minimumSize ?? const Size(150, 40),
+      shape: shape,
     );

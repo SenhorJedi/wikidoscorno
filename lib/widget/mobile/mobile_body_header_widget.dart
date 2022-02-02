@@ -51,17 +51,11 @@ class MobileBodyHeader extends StatelessWidget {
             ),
           ),
           ElevatedButton(
-            style: styleElevatedButton(
-              primary: websiteInsidePurple,
-              onPrimary: Colors.white,
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const CadastroArtigoPage(),
+              ),
             ),
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const CadastroArtigoPage(),
-                ),
-              );
-            },
             child: Text(
               "Cadastrar artigo",
               style: styleTexto(),

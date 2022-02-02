@@ -83,8 +83,12 @@ class ApiProvider {
     );
   }
 
-  Future<String> insertArtigo(
-      String titulo, String conteudo, String linguagem, String tag) async {
+  Future<String> insertArtigo({
+    required String titulo,
+    required String conteudo,
+    required String linguagem,
+    required String tag,
+  }) async {
     String res = '';
 
     const String unencodedPath = '/api/v1/wiki/artigo';

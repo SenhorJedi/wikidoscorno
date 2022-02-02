@@ -15,12 +15,11 @@ class _CadastroArtigoPageState extends State<CadastroArtigoPage> {
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
+        extendBodyBehindAppBar: true,
         backgroundColor: websitePurple,
-        // appBar: AppBar(
-        //    elevation: 0,
-        //    backgroundColor: Colors.transparent,
-        //  ),
+        appBar: AppBar(),
         body: Stack(
           children: [
             Padding(
@@ -32,44 +31,16 @@ class _CadastroArtigoPageState extends State<CadastroArtigoPage> {
                     style: styleTituloNegrito(color: Colors.white),
                   ),
                   const FormularioCadastro(),
-                  ElevatedButton(
-                    onPressed: () async {
-                      setState(() {
-                        isLoading = !isLoading;
-                      });
-
-                      String response = await ApiProvider().insertArtigo(
-                          'api apiapi',
-                          'aqui é o conteudo',
-                          'aqui a linguagem',
-                          'tag');
-
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          behavior: SnackBarBehavior.floating,
-                          padding: const EdgeInsets.all(10),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          content: Container(
-                            child: Text(
-                              response.toString(),
-                            ),
-                          ),
-                        ),
-                      );
-
-                      setState(() {
-                        isLoading = !isLoading;
-                      });
-                    },
-                    style: styleElevatedButton(
-                      primary: Colors.white,
-                    ),
-                    child: Text(
-                      'Salvar',
-                      style: styleTexto(
-                        color: Colors.purple.shade900,
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      style: styleElevatedButton(
+                          minimumSize: Size(size.width, 50),
+                          shape: const StadiumBorder()),
+                      onPressed: () => salvarButtonOnPressed(),
+                      child: Text(
+                        'Salvar',
+                        style: styleTexto(),
                       ),
                     ),
                   ),
@@ -80,7 +51,7 @@ class _CadastroArtigoPageState extends State<CadastroArtigoPage> {
                 ? Container(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
-                    color: Colors.grey.withOpacity(.5),
+                    color: websiteInsidePurple.withOpacity(0.5),
                     child: const Center(
                       child: CircularProgressIndicator(),
                     ),
@@ -88,5 +59,37 @@ class _CadastroArtigoPageState extends State<CadastroArtigoPage> {
                 : const SizedBox(),
           ],
         ));
+  }
+
+  salvarButtonOnPressed() async {
+    setState(() {
+      isLoading = !isLoading;
+    });
+
+    await Future.delayed(const Duration(milliseconds: 500));
+/*
+    String response = await ApiProvider().insertArtigo(
+      titulo: 'api apiapi',
+      conteudo: 'aqui é o conteudo',
+      linguagem: 'aqui a linguagem',
+      tag: 'tag',
+    );
+*/
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        behavior: SnackBarBehavior.floating,
+        padding: const EdgeInsets.all(10),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
+        content: const Text(
+          'teste', //response.toString(),
+        ),
+      ),
+    );
+
+    setState(() {
+      isLoading = !isLoading;
+    });
   }
 }

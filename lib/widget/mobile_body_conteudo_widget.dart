@@ -32,7 +32,8 @@ class MobileBodyConteudo extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   ),
                 );
-              } else {
+              } else if (snapshot.connectionState == ConnectionState.done &&
+                  snapshot.data!.artigos.isNotEmpty) {
                 return GridView.builder(
                   itemCount: snapshot.data!.artigos.length,
                   gridDelegate:
@@ -65,6 +66,8 @@ class MobileBodyConteudo extends StatelessWidget {
                     );
                   },
                 );
+              } else {
+                Text('NAO TEM NADA AQUI C**IO');
               }
             },
           );
