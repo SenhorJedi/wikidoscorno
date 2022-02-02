@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         body: MaxWidthContainer(
             child: ResponsiveLayout(
           //AQUI FICA OS 3 "SITES" CRIADOS, POIS ASSIM TEMOS CONTROLE INDIVUDIAL POR TELA, DA PRA FAZER UNS AJUSTES FINOS ASSIM.
-          mobileBody: MobileBody(),
+          mobileBody: CadastroArtigoPage(), // MobileBody(),
           //tabletBody: TabletBody(),
           //desktopBody: DesktopBody(),
         )),

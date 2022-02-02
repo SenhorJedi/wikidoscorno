@@ -82,4 +82,37 @@ class ApiProvider {
       maxpage,
     );
   }
+
+  Future<String> insertArtigo(
+      String titulo, String conteudo, String linguagem, String tag) async {
+    String res = '';
+
+    const String unencodedPath = '/api/v1/wiki/artigo';
+
+    try {
+      var response = await http
+          .post(
+            Uri.https(authority, unencodedPath),
+            headers: <String, String>{
+              'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: jsonEncode(
+              <String, dynamic>{
+                'titulo': titulo,
+                'conteudo': conteudo,
+                'linguagem': linguagem,
+                'tag': tag,
+              },
+            ),
+          )
+          .timeout(const Duration(seconds: 60));
+
+      res = response.body;
+    } catch (e) {
+      res = '$e';
+      print(e);
+    }
+
+    return res;
+  }
 }
