@@ -40,6 +40,7 @@ class ApiProvider {
     String orderby = orderBy,
     String ordemtipo = ordemTipo,
     int pagesize = pageSize,
+    int ativo = 1,
   }) async {
     List<Artigo> artigos = [];
     int maxpage = 0;
@@ -53,6 +54,7 @@ class ApiProvider {
       'ordem': orderby,
       'ordemtp': ordemtipo,
       'pesquisasrc': search.trim(),
+      'ativo': ativo.toString(),
     };
 
     try {
@@ -92,6 +94,7 @@ class ApiProvider {
     required String conteudo,
     required String linguagem,
     required String tag,
+    required String email,
   }) async {
     String res = '';
 
@@ -102,6 +105,7 @@ class ApiProvider {
       'conteudo': conteudo,
       'linguagem': linguagem,
       'tag': tag,
+      'email_usuario': email
     };
 
     try {

@@ -21,8 +21,9 @@ class Artigo {
     required this.linguagem,
     required this.tag,
     required this.ativo,
-    required this.create_date,
+    required this.createDate,
     required this.visualizacao,
+    required this.emailUsuario,
   });
 
   int id;
@@ -32,8 +33,9 @@ class Artigo {
   String linguagem;
   String tag;
   int ativo;
-  DateTime create_date;
+  DateTime createDate;
   int visualizacao;
+  String emailUsuario;
 
   factory Artigo.fromJson(Map<String, dynamic> json) => Artigo(
         id: json["id"],
@@ -44,7 +46,8 @@ class Artigo {
         tag: json["tag"],
         visualizacao: json["visualizacao"],
         ativo: json["ativo"],
-        create_date: DateTime.parse(json["create_date"]),
+        createDate: DateTime.parse(json["create_date"]),
+        emailUsuario: json["email_usuario"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -57,6 +60,6 @@ class Artigo {
         "visualizacao": visualizacao,
         "ativo": ativo,
         "create_date":
-            "${create_date.year.toString().padLeft(4, '0')}-${create_date.month.toString().padLeft(2, '0')}-${create_date.day.toString().padLeft(2, '0')}",
+            "${createDate.year.toString().padLeft(4, '0')}-${createDate.month.toString().padLeft(2, '0')}-${createDate.day.toString().padLeft(2, '0')}",
       };
 }
