@@ -17,10 +17,10 @@ class _CadastroArtigoPageState extends State<CadastroArtigoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: websitePurple,
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-        ),
+        // appBar: AppBar(
+        //    elevation: 0,
+        //    backgroundColor: Colors.transparent,
+        //  ),
         body: Stack(
           children: [
             Padding(
