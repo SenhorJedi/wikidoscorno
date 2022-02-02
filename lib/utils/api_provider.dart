@@ -44,6 +44,7 @@ class ApiProvider {
     List<Artigo> artigos = [];
     int maxpage = 0;
     String statuscode = '';
+    String responsebody = '';
 
     const String unencodedPath = '/api/v1/wiki/artigo';
     Map<String, String> params = {
@@ -64,7 +65,7 @@ class ApiProvider {
             ),
           )
           .timeout(const Duration(seconds: 60));
-
+      responsebody = response.body;
       var decoded = json.decode(response.body);
 
       artigos = List<Artigo>.from(
@@ -74,8 +75,11 @@ class ApiProvider {
       maxpage = decoded["last_page"];
     } catch (e) {
       statuscode = '$e';
-      print(e);
+      print('ERRO = $e');
+      print('RESPONSE BODY = $responsebody');
+      print('PARAMS = $params');
     }
+
     return ResultApiArtigo(
       artigos,
       statuscode,
@@ -93,6 +97,13 @@ class ApiProvider {
 
     const String unencodedPath = '/api/v1/wiki/artigo';
 
+    var values = <String, dynamic>{
+      'titulo': titulo,
+      'conteudo': conteudo,
+      'linguagem': linguagem,
+      'tag': tag,
+    };
+
     try {
       var response = await http
           .post(
@@ -100,21 +111,15 @@ class ApiProvider {
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
             },
-            body: jsonEncode(
-              <String, dynamic>{
-                'titulo': titulo,
-                'conteudo': conteudo,
-                'linguagem': linguagem,
-                'tag': tag,
-              },
-            ),
+            body: jsonEncode(values),
           )
           .timeout(const Duration(seconds: 60));
 
       res = response.body;
     } catch (e) {
-      res = '$e';
+      res = 'Erro ao Salvar! $e';
       print(e);
+      print(values);
     }
 
     return res;
