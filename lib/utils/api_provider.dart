@@ -74,7 +74,7 @@ class ApiProvider {
 
       maxpage = decoded["last_page"];
     } catch (e) {
-      statuscode = '$e';
+      statuscode = 'Erro ao buscar! $e';
       print('ERRO = $e');
       print('RESPONSE BODY = $responsebody');
       print('PARAMS = $params');
