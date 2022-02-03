@@ -13,6 +13,7 @@ class AppTheme {
       primaryColor: Colors.white,
       primarySwatch: materialWhite,
       visualDensity: VisualDensity.adaptivePlatformDensity,
+      errorColor: Colors.orange.shade300,
       floatingActionButtonTheme: const FloatingActionButtonThemeData(),
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
@@ -42,11 +43,6 @@ class AppTheme {
           primary: materialWhite,
           onPrimary: websitePurple,
         ),
-      ),
-      textSelectionTheme: const TextSelectionThemeData(
-        cursorColor: Colors.green,
-        selectionColor: Colors.green,
-        selectionHandleColor: Colors.green,
       ),
     );
   }

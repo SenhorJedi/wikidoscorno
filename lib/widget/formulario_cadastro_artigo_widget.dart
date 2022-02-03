@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wikidoscorno/utils/colors.dart';
 import 'package:wikidoscorno/utils/decoration_widgets.dart';
 import 'package:wikidoscorno/utils/estilos_texto.dart';
+import 'package:wikidoscorno/utils/global_keys.dart';
 
 class FormularioCadastro extends StatefulWidget {
   const FormularioCadastro({
@@ -13,19 +14,11 @@ class FormularioCadastro extends StatefulWidget {
 }
 
 class _FormularioCadastroState extends State<FormularioCadastro> {
-  late final GlobalKey<FormState> _formKey;
-
-  @override
-  void initState() {
-    super.initState();
-    _formKey = GlobalKey<FormState>();
-  }
-
   String dropdownValue = 'pt-br';
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _formKey,
+      key: artigoCadformKey,
       child: Column(
         children: [
           Padding(
@@ -41,6 +34,11 @@ class _FormularioCadastroState extends State<FormularioCadastro> {
           Padding(
             padding: const EdgeInsets.all(10),
             child: TextFormField(
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Campo Conteudo é obrigatório';
+                }
+              },
               maxLines: 5,
               decoration: decorationTextFormField(
                 label: 'Conteudo',
@@ -57,7 +55,7 @@ class _FormularioCadastroState extends State<FormularioCadastro> {
               ),
               child: DropdownButtonFormField<String>(
                 value: dropdownValue,
-                items: <String>['pt-br', 'eng', 'pt', 'mandarim']
+                items: <String>['pt-br', 'eng', 'mandarim']
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -92,6 +90,20 @@ class _FormularioCadastroState extends State<FormularioCadastro> {
                 label: 'Tag',
                 fillColor: websiteInsidePurple,
                 labelStyle: styleTexto(color: Colors.white, fontSize: 18),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: TextFormField(
+              keyboardType: TextInputType.emailAddress,
+              decoration: decorationTextFormField(
+                label: 'E-Mail',
+                fillColor: websiteInsidePurple,
+                labelStyle: styleTexto(
+                  color: Colors.white,
+                  fontSize: 18,
+                ),
               ),
             ),
           ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:wikidoscorno/utils/api_provider.dart';
 import 'package:wikidoscorno/utils/colors.dart';
 import 'package:wikidoscorno/utils/estilos_texto.dart';
+import 'package:wikidoscorno/utils/global_keys.dart';
 import 'package:wikidoscorno/widget/formulario_cadastro_artigo_widget.dart';
 
 class CadastroArtigoPage extends StatefulWidget {
@@ -63,11 +64,12 @@ class _CadastroArtigoPageState extends State<CadastroArtigoPage> {
   }
 
   salvarButtonOnPressed() async {
-    setState(() {
-      isLoading = !isLoading;
-    });
+    if (artigoCadformKey.currentState!.validate()) {
+      setState(() {
+        isLoading = !isLoading;
+      });
 
-    await Future.delayed(const Duration(milliseconds: 500));
+      await Future.delayed(const Duration(milliseconds: 500));
 /*
     String response = await ApiProvider().insertArtigo(
       titulo: 'api apiapi',
@@ -76,21 +78,22 @@ class _CadastroArtigoPageState extends State<CadastroArtigoPage> {
       tag: 'tag',
     );
 */
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        behavior: SnackBarBehavior.floating,
-        padding: const EdgeInsets.all(10),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5),
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          behavior: SnackBarBehavior.floating,
+          padding: const EdgeInsets.all(10),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5),
+          ),
+          content: const Text(
+            'teste', //response.toString(),
+          ),
         ),
-        content: const Text(
-          'teste', //response.toString(),
-        ),
-      ),
-    );
+      );
 
-    setState(() {
-      isLoading = !isLoading;
-    });
+      setState(() {
+        isLoading = !isLoading;
+      });
+    }
   }
 }
